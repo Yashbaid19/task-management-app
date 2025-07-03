@@ -1,23 +1,16 @@
 // src/services/taskService.js
-import axios from 'axios';
+import api from './axiosClient'; // centralized axios instance
 
-const token = localStorage.getItem('token');
-const API_URL = '/api/tasks'; // Proxy handles base path
-
-const config = {
-  headers: {
-    Authorization: `Bearer ${token}`,
-  },
-};
+const API_URL = '/tasks';
 
 export const getTasks = () =>
-  axios.get('/api/tasks', config).then(res => res.data);
+  api.get(API_URL).then((res) => res.data);
 
 export const addTask = (taskData) =>
-  axios.post('/api/tasks', taskData, config).then(res => res.data);
+  api.post(API_URL, taskData).then((res) => res.data);
 
 export const updateTask = (taskId, taskData) =>
-  axios.put(`/api/tasks/${taskId}`, taskData, config).then(res => res.data);
+  api.put(`${API_URL}/${taskId}`, taskData).then((res) => res.data);
 
 export const deleteTask = (taskId) =>
-  axios.delete(`/api/tasks/${taskId}`, config).then(res => res.data);
+  api.delete(`${API_URL}/${taskId}`).then((res) => res.data);

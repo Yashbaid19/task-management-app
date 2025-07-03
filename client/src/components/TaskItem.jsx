@@ -17,6 +17,11 @@ const TaskItem = ({ task, onEdit, onDelete, onToggleStatus }) => {
                 : task.description}
             </p>
           )}
+{task.dueDate && (
+  <p className="text-muted small mt-2">
+    📅 Due: {new Date(task.dueDate).toLocaleDateString()}
+  </p>
+)}
           <span className={`badge bg-${badgeColor}`}>
             {task.status.charAt(0).toUpperCase() + task.status.slice(1)}
           </span>
